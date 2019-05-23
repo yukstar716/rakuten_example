@@ -1,0 +1,26 @@
+<%= form_with url: rakuten_search, method: :get do |f| %>
+  <%= f.label :keyword, "キーワード検索" %>
+  <%= f.text_field :"keyword", params[:keyword] %>
+  <%= f.submit "検索" %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>価格</th>
+      <th>画像</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @items.present? %>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name, "#{item.url}" %></td>
+          <td align="right"><%= number_with_deliimiter(item.price) %>円</td>
+          <td><%= image_tag item["smallImageUrls"][0]["imageUrl"]%></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
