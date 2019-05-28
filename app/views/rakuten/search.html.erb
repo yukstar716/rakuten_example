@@ -1,6 +1,6 @@
-<%= form_with url: rakuten_search, method: :get do |f| %>
+<%= form_with url: "rakuten_search", method: (:get), local: true do |f| %>
   <%= f.label :keyword, "キーワード検索" %>
-  <%= f.text_field :"keyword", params[:keyword] %>
+  <%= f.text_field :keyword %>
   <%= f.submit "検索" %>
 <% end %>
 
@@ -16,9 +16,9 @@
     <% if @items.present? %>
       <% @items.each do |item| %>
         <tr>
+          <td><%= image_tag item['smallImageUrls'][0] %></td>
           <td><%= link_to item.name, "#{item.url}" %></td>
-          <td align="right"><%= number_with_deliimiter(item.price) %>円</td>
-          <td><%= image_tag item["smallImageUrls"][0]["imageUrl"]%></td>
+          <td align="right"><%= number_with_delimiter(item.price) %>円</td>
         </tr>
       <% end %>
     <% end %>
